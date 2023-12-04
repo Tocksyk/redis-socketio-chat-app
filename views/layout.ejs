@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+          <h1 class="pull-left">PacktChat</h1>
+        </div>
+        <div class="col-sm-4 col-sm-offset-4 top-margin">
+          <div class="pull-right">
+            <% if (isAuthenticated) { %> <%- partial('partials/user-loggedin') %> <% } else { %> <%-
+            partial('partials/user-loggedout') %> <% } %>
+          </div>
+        </div>
+      </div>
+      <div class="row"><%- body %></div>
+    </div>
+    <!-- <script type="text/javascript" src="/js/socket.io.js"></script> -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script>
+      var socket = io.connect("http://localhost:3000/packtchat");
+      socket.on("message", function (d) {
+        console.log(d);
+      });
+    </script>
+  </body>
+</html>
